@@ -1,2 +1,1 @@
-project (hello)
-add_executable(hello src/helloworld.cpp)
+BUILD_TARGET_APP(helloworld)

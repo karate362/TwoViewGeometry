@@ -1,10 +1,9 @@
-#include<iostream>
-#include <Eigen/Dense>
-using Eigen::MatrixXd;
+#include <iostream>
+#include "kinematics/matrix_types.h"
 
 int main()
 {
-  MatrixXd m(2,2);
+  kinematics::Matrix2d m(2,2);
   m(0,0) = 3;
   m(1,0) = 2.5;
   m(0,1) = -1;
