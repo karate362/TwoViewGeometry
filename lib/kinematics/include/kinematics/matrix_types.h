@@ -1,5 +1,6 @@
-#ifndef KINEMATICS_MATRIX_TYPES_H
-#define KINEMATICS_MATRIX_TYPES_H
+// Copyright 2016 Chih-Chung Chou
+#ifndef KINEMATICS_MATRIX_TYPES_H_
+#define KINEMATICS_MATRIX_TYPES_H_
 
 #include <Eigen/Dense>
 
@@ -24,6 +25,6 @@ namespace kinematics {
   typedef Eigen::Matrix<double, 7, 7> Matrix7d;
   typedef Eigen::Matrix<double, 8, 8> Matrix8d;
   typedef Eigen::Matrix<double, 9, 9> Matrix9d;
-}  // namespace kinematics
+} // namespace kinematics
 
-#endif  // KINEMATICS_MATRIX_TYPES_H
+#endif // KINEMATICS_MATRIX_TYPES_H_
