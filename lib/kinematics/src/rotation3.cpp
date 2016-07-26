@@ -1,6 +1,6 @@
 // Copyright 2016 Chih-Chung Chou
-#include <iostream>
 #include <math.h>
+#include <iostream>
 
 #include "kinematics/rotation3.h"
 
@@ -31,6 +31,17 @@ bool Rotation3::FromQuaternion(const Vector4d& quat) {
   return true;
 }
 
+bool Rotation3::FromRotationMatrix(const Matrix3d &Rm) {
+    Quatd quat(Rm);
+
+    quat_(0) = quat.w();
+    quat_(1) = quat.x();
+    quat_(2) = quat.y();
+    quat_(3) = quat.z();
+
+    return true;
+}
+
 Matrix3d Rotation3::GetRotationMatrix() const {
   Matrix3d Rm;
   const double& qw = quat_(0);
@@ -43,6 +54,18 @@ Matrix3d Rotation3::GetRotationMatrix() const {
        2*qx*qz - 2*qy*qw, 2*qy*qz + 2*qx*qw, 1 - 2*qx*qx - 2*qy*qy;
 
   return Rm;
+}
+
+Vector3d Rotation3::Rotate(const Vector3d &px) const {
+    Matrix3d Rm = this->GetRotationMatrix();
+
+    return Rm*px;
+}
+
+Vector3d Rotation3::InverseRotate(const Vector3d &px) const {
+    Matrix3d Rm = this->GetRotationMatrix();
+
+    return Rm.transpose()*px;
 }
 
 }  // namespace kinematics
