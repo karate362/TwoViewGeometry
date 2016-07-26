@@ -32,14 +32,13 @@ bool Rotation3::FromQuaternion(const Vector4d& quat) {
 }
 
 bool Rotation3::FromRotationMatrix(const Matrix3d &Rm) {
-    Quatd quat(Rm);
+  Eigen::Quaterniond quat(Rm);
+  quat_(0) = quat.w();
+  quat_(1) = quat.x();
+  quat_(2) = quat.y();
+  quat_(3) = quat.z();
 
-    quat_(0) = quat.w();
-    quat_(1) = quat.x();
-    quat_(2) = quat.y();
-    quat_(3) = quat.z();
-
-    return true;
+  return true;
 }
 
 Matrix3d Rotation3::GetRotationMatrix() const {
@@ -57,15 +56,15 @@ Matrix3d Rotation3::GetRotationMatrix() const {
 }
 
 Vector3d Rotation3::Rotate(const Vector3d &px) const {
-    Matrix3d Rm = this->GetRotationMatrix();
+  Matrix3d Rm = this->GetRotationMatrix();
 
-    return Rm*px;
+  return Rm*px;
 }
 
 Vector3d Rotation3::InverseRotate(const Vector3d &px) const {
-    Matrix3d Rm = this->GetRotationMatrix();
+  Matrix3d Rm = this->GetRotationMatrix();
 
-    return Rm.transpose()*px;
+  return Rm.transpose()*px;
 }
 
 }  // namespace kinematics
