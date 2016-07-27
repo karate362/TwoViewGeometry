@@ -33,9 +33,7 @@ bool Rotation3::FromQuaternion(const Vector4d& quat) {
 
 bool Rotation3::FromRotationMatrix(const Matrix3d &Rm) {
   Eigen::Quaterniond quat(Rm);
-
   quat_ << quat.w(), quat.x(), quat.y(), quat.z();
-
   return true;
 }
 
