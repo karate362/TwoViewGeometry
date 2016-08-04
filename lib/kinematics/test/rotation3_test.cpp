@@ -7,7 +7,9 @@
 
 using kinematics::Matrix3d;
 using kinematics::Rotation3;
+using kinematics::Vector3d;
 using kinematics::Vector4d;
+
 
 TEST(Rotation3Test, TestNullPtr) {
   Rotation3 Rx;
@@ -30,4 +32,28 @@ TEST(Rotation3Test, TestQuaternion) {
   Rx.FromQuaternion(quat);
   Matrix3d Rm = Rx.GetRotationMatrix();
   EXPECT_TRUE((Rm - Rt).norm() < 1e-6);
+}
+
+TEST(Rotation3Test, TestRotation) {
+  // A ground truth from Octave (https://www.gnu.org/software/octave/)
+  Vector3d v3d_src;
+  Vector3d v3d_tgt, v3d_result;
+  Vector3d v3d_inv_tgt, v3d_inv_result;
+  Matrix3d Rm;
+  v3d_src << 123.531, 332.434, 5654.599;
+  v3d_tgt << -3464.041646, 3458.651009, 2852.790003;
+  v3d_inv_tgt << 1304.692128, -4478.85664, 3215.257963;
+
+  Rm << 0.748304689, -0.2505358843, -0.6142246031,
+        0.639361744, 0.5191751646, 0.5671628592,
+        0.1767955109, -0.8171223404, 0.54868427;
+
+  Rotation3 Rx;
+  Rx.FromRotationMatrix(Rm);
+
+  v3d_result = Rx.Rotate(v3d_src);
+  v3d_inv_result = Rx.InverseRotate(v3d_src);
+  EXPECT_TRUE((Rx.GetRotationMatrix()*v3d_src - v3d_tgt).norm() < 1e-6);
+  EXPECT_TRUE((v3d_result - v3d_tgt).norm() < 1e-6);
+  EXPECT_TRUE((v3d_inv_result - v3d_inv_tgt).norm() < 1e-6);
 }

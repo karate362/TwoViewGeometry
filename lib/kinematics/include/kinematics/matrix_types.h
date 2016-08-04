@@ -25,6 +25,7 @@ namespace kinematics {
   typedef Eigen::Matrix<double, 7, 7> Matrix7d;
   typedef Eigen::Matrix<double, 8, 8> Matrix8d;
   typedef Eigen::Matrix<double, 9, 9> Matrix9d;
+
 } // namespace kinematics
 
 #endif // KINEMATICS_MATRIX_TYPES_H_
