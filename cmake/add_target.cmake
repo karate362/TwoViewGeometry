@@ -75,6 +75,6 @@ macro(BUILD_TARGET_APP unit_name)
     target_link_libraries(${f})
   endforeach()
 
-  ADD_UNIT_TEST(${PROJECT_NAME})
+  #ADD_UNIT_TEST(${PROJECT_NAME})
 
 endmacro(BUILD_TARGET_APP)

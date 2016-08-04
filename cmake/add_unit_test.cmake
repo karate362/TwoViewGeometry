@@ -30,6 +30,8 @@ function(ADD_UNIT_TEST unit_name)
 
   target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
+  target_link_libraries(${PROJECT_TEST_NAME} ${unit_name})
+
   add_test(${PROJECT_TEST_NAME} ${PROJECT_TEST_NAME})
 
 endfunction(ADD_UNIT_TEST)
